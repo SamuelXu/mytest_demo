@@ -65,21 +65,21 @@ if [ "$(echo $a '>' 5|bc -l)" -eq 1 ];then
     echo $a
 fi
 
-i=10
-j=10
+i=50
+j=0
 k=100
-
+step=5
 while true;do
     echo $i,$j,$k
-    if [ $i -eq $k ];then
+    if [ $i -eq $k -o $i -eq $j ];then
         break
     fi
     if [ $i -gt 61 ];then
         k=$i
-        ((i = (i + j - 5) / 2 / 5 * 5))
+        ((i = (i + j) / 2 / step * step))
     else
         j=$i
-        ((i = (i + k + 5) / 2 / 5 * 5))
+        ((i = (i + k) / 2 / step * step))
     fi
 done
 
