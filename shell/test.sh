@@ -58,8 +58,10 @@ while true;do
 done
 
 #compare float
-a=6.5
-if [ "$(expr $a '>' 5)" -eq 1 ];then
+a=15
+#if [ "$(expr $a '>' 5.2)" -eq 1 ];then
+#when compare float use expr is wrong,should like below
+if [ "$(echo $a '>' 5|bc -l)" -eq 1 ];then
     echo $a
 fi
 
