@@ -83,3 +83,10 @@ while true;do
     fi
 done
 
+
+declare -A mp
+mp=([a]=135 [b]=136 [c]=137)
+for k in ${!mp[@]}
+do
+    echo "$k --> ${mp[$k]}"
+done
