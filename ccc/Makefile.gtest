@@ -1,0 +1,16 @@
+CC = g++
+CXXFLAGS = -g
+LDFLAGS = -std=c++11 -L/usr/local/lib -lgtest_main -lgtest -lpthread
+
+SOURCE = $(wildcard *_test.cc)
+TARGET = $(patsubst %.cc, %, $(SOURCE))
+
+
+all : $(TARGET)
+.PHONY : all
+
+$(TARGET) : % : %.cc 
+	${CC} $< $(subst _test.cc,.cc,$<) $(CXXFLAGS) $(LDFLAGS) -o $@
+
+clean:
+	@rm -f $(TARGET)
