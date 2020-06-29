@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 
 void* mymemset(void* b, int c, size_t len)
 {
@@ -12,7 +13,8 @@ void* mymemset(void* b, int c, size_t len)
     *(char*)(b+i) = c;
   }
   uint64_t* tmp = b+pad;
-  size_t times = len / 8;
+  size_t times = (len-pad) / 8;
+  if(times == 0) return b;
   switch(times % 8) {
     do {
       default:
@@ -45,7 +47,7 @@ void* mymemset(void* b, int c, size_t len)
 }
 #include <string.h>
 int main() {
-  char* a = malloc(16);
+  char* a = (char*)malloc(16);
   *(a+16) = 0;
   mymemset(a, 'F', 15);
   printf("%s\n", a);
